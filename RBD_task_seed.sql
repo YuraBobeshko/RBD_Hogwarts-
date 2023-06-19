@@ -21,7 +21,7 @@ SELECT 4, 'Charms', 'Study of spells that add properties to things' FROM dual;
 
 -- Populate Club table
 INSERT INTO Club(ID, Name, Description)
-SELECT 1, 'Dumbledore"s Army', 'A student organisation for studying Defence Against the Dark Arts' FROM dual UNION ALL
+SELECT 1, 'Dumbledore''s Army', 'A student organisation for studying Defence Against the Dark Arts' FROM dual UNION ALL
 SELECT 2, 'Slug Club', 'A club of students chosen by Professor Slughorn' FROM dual UNION ALL
 SELECT 3, 'Gobstones Club', 'A club that plays Gobstones' FROM dual;
 
@@ -49,6 +49,13 @@ SELECT 6, 'Gregory', 'MiddleName', 'Goyle', TO_DATE('1980-06-30','YYYY-MM-DD'), 
 SELECT 7, 'Cedric', 'MiddleName', 'Diggory', TO_DATE('1977-10-01','YYYY-MM-DD'), 1, 7, 3 FROM dual UNION ALL
 SELECT 8, 'Cho', 'MiddleName', 'Chang', TO_DATE('1979-02-14','YYYY-MM-DD'), 0, 5, 4 FROM dual;
 
+-- Insert into Grade
+INSERT INTO Grade(ID, Student_ID, Subject_ID, Grade, "Date", Description, Teacher_ID)
+SELECT 1, 1, 3, 85, TO_DATE('2023-12-10','YYYY-MM-DD'), NULL, 1 FROM dual UNION ALL
+SELECT 2, 2, 3, 95, TO_DATE('2023-12-10','YYYY-MM-DD'), NULL, 2 FROM dual UNION ALL
+SELECT 3, 3, 3, 75, TO_DATE('2023-12-10','YYYY-MM-DD'), NULL, 3 FROM dual UNION ALL
+SELECT 4, 4, 3, 70, TO_DATE('2023-12-10','YYYY-MM-DD'), NULL, 4 FROM dual;
+
 -- Populate Teacher table
 INSERT INTO Teacher(ID, FirstName, MiddleName, LastName, Birth, Gender, House_ID)
 SELECT 1, 'Minerva', 'MiddleName', 'McGonagall', TO_DATE('1935-10-04','YYYY-MM-DD'), 0, 1 FROM dual UNION ALL
@@ -58,13 +65,6 @@ SELECT 4, 'Filius', 'MiddleName', 'Flitwick', TO_DATE('1958-10-17','YYYY-MM-DD')
 SELECT 5, 'Albus', 'Percival Wulfric Brian', 'Dumbledore', TO_DATE('1881-08-01','YYYY-MM-DD'), 1, NULL FROM dual UNION ALL
 SELECT 6, 'Dolores', 'Jane', 'Umbridge', TO_DATE('1965-08-26','YYYY-MM-DD'), 0, NULL FROM dual UNION ALL
 SELECT 7, 'Horace', 'Eugene Flaccus', 'Slughorn', TO_DATE('1882-04-28','YYYY-MM-DD'), 1, NULL FROM dual;
-
--- Populate Grade table
-INSERT INTO Grade(ID, Student_ID, Subject_ID, Score, "Date")
-SELECT 1, 1, 1, 85, TO_DATE('2023-12-10','YYYY-MM-DD') FROM dual UNION ALL
-SELECT 2, 2, 2, 95, TO_DATE('2023-12-10','YYYY-MM-DD') FROM dual UNION ALL
-SELECT 3, 3, 3, 75, TO_DATE('2023-12-10','YYYY-MM-DD') FROM dual UNION ALL
-SELECT 4, 4, 4, 70, TO_DATE('2023-12-10','YYYY-MM-DD') FROM dual;
 
 -- Populate Schedule table
 INSERT INTO Schedule(ID, Subject_ID, Student_ID, Teacher_ID, "Date", Duration, Task, Material)

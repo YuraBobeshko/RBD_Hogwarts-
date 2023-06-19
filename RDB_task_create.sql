@@ -1,8 +1,52 @@
--- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-05-06 06:46:32.454
+-- Table: Subject_Teacher
+DROP TABLE Subject_Teacher;
 
--- tables
+-- Table: Teacher
+DROP TABLE Teacher;
+
+-- Table: Subject
+DROP TABLE Subject;
+
+-- Table: Student
+DROP TABLE Student;
+
+-- Table: Schedule
+DROP TABLE Schedule;
+
+-- Table: Quidditch_Student
+DROP TABLE Quidditch_Student;
+
+-- Table: Quidditch
+DROP TABLE Quidditch;
+
+-- Table: Position
+DROP TABLE Position;
+
+-- Table: House
+DROP TABLE House;
+
+-- Table: Grade
+DROP TABLE Grade;
+
+-- Table: Event_Teacher
+DROP TABLE Event_Teacher;
+
+-- Table: Event_Student
+DROP TABLE Event_Student;
+
+-- Table: Event
+DROP TABLE Event;
+
+-- Table: Club_Teacher
+DROP TABLE Club_Teacher;
+
+-- Table: Club_Student
+DROP TABLE Club_Student;
+
 -- Table: Club
+DROP TABLE Club;
+
+
 CREATE TABLE Club (
     ID integer  NOT NULL,
     Name varchar2(30)  NOT NULL,
@@ -95,11 +139,10 @@ CREATE TABLE Quidditch_Student (
     CONSTRAINT Quidditch_Student_pk PRIMARY KEY (Student_ID,Quidditch_ID,Position_ID)
 ) ;
 
--- Table: Schedule
 CREATE TABLE Schedule (
     ID integer  NOT NULL,
     "Date" date  NOT NULL,
-    Duration date  NOT NULL,
+    Duration INTERVAL DAY TO SECOND  NOT NULL,
     Subject_ID integer  NOT NULL,
     Student_ID integer  NOT NULL,
     Teacher_ID integer  NOT NULL,
@@ -127,14 +170,14 @@ CREATE TABLE Subject (
     Name varchar2(30)  NOT NULL,
     Description varchar2(200)  NOT NULL,
     CONSTRAINT Subject_pk PRIMARY KEY (ID)
-) ;
+);
 
 -- Table: Subject_Teacher
 CREATE TABLE Subject_Teacher (
     Teacher_ID integer  NOT NULL,
     Subject_ID integer  NOT NULL,
     CONSTRAINT Subject_Teacher_pk PRIMARY KEY (Subject_ID,Teacher_ID)
-) ;
+);
 
 -- Table: Teacher
 CREATE TABLE Teacher (
@@ -147,127 +190,3 @@ CREATE TABLE Teacher (
     House_ID integer,
     CONSTRAINT Teacher_pk PRIMARY KEY (ID)
 ) ;
-
--- foreign keys
--- Reference: Event_Student_Event (table: Event_Student)
-ALTER TABLE Event_Student ADD CONSTRAINT Event_Student_Event
-    FOREIGN KEY (Event_ID)
-    REFERENCES Event (ID);
-
--- Reference: Event_Student_Student (table: Event_Student)
-ALTER TABLE Event_Student ADD CONSTRAINT Event_Student_Student
-    FOREIGN KEY (Student_ID)
-    REFERENCES Student (ID);
-
--- Reference: Event_Teacher_Event (table: Event_Teacher)
-ALTER TABLE Event_Teacher ADD CONSTRAINT Event_Teacher_Event
-    FOREIGN KEY (Event_ID)
-    REFERENCES Event (ID);
-
--- Reference: Event_Teacher_Teacher (table: Event_Teacher)
-ALTER TABLE Event_Teacher ADD CONSTRAINT Event_Teacher_Teacher
-    FOREIGN KEY (Teacher_ID)
-    REFERENCES Teacher (ID);
-
--- Reference: Game_Quidditch (table: Quidditch_Student)
-ALTER TABLE Quidditch_Student ADD CONSTRAINT Game_Quidditch
-    FOREIGN KEY (Quidditch_ID)
-    REFERENCES Quidditch (ID);
-
--- Reference: Game_Student (table: Quidditch_Student)
-ALTER TABLE Quidditch_Student ADD CONSTRAINT Game_Student
-    FOREIGN KEY (Student_ID)
-    REFERENCES Student (ID);
-
--- Reference: Grade_Student (table: Grade)
-ALTER TABLE Grade ADD CONSTRAINT Grade_Student
-    FOREIGN KEY (Student_ID)
-    REFERENCES Student (ID);
-
--- Reference: Grade_Subject (table: Grade)
-ALTER TABLE Grade ADD CONSTRAINT Grade_Subject
-    FOREIGN KEY (Subject_ID)
-    REFERENCES Subject (ID);
-
--- Reference: Grade_Teacher (table: Grade)
-ALTER TABLE Grade ADD CONSTRAINT Grade_Teacher
-    FOREIGN KEY (Teacher_ID)
-    REFERENCES Teacher (ID);
-
--- Reference: House_Student (table: House)
-ALTER TABLE House ADD CONSTRAINT House_Student
-    FOREIGN KEY (Student_ID)
-    REFERENCES Student (ID);
-
--- Reference: House_Teacher (table: House)
-ALTER TABLE House ADD CONSTRAINT House_Teacher
-    FOREIGN KEY (Teacher_ID)
-    REFERENCES Teacher (ID);
-
--- Reference: Quidditch_House (table: Quidditch)
-ALTER TABLE Quidditch ADD CONSTRAINT Quidditch_House
-    FOREIGN KEY (Winner_House_ID)
-    REFERENCES House (ID);
-
--- Reference: Quidditch_Student_Position (table: Quidditch_Student)
-ALTER TABLE Quidditch_Student ADD CONSTRAINT Quidditch_Student_Position
-    FOREIGN KEY (Position_ID)
-    REFERENCES Position (ID);
-
--- Reference: Schedule_Student (table: Schedule)
-ALTER TABLE Schedule ADD CONSTRAINT Schedule_Student
-    FOREIGN KEY (Student_ID)
-    REFERENCES Student (ID);
-
--- Reference: Schedule_Subject (table: Schedule)
-ALTER TABLE Schedule ADD CONSTRAINT Schedule_Subject
-    FOREIGN KEY (Subject_ID)
-    REFERENCES Subject (ID);
-
--- Reference: Schedule_Teacher (table: Schedule)
-ALTER TABLE Schedule ADD CONSTRAINT Schedule_Teacher
-    FOREIGN KEY (Teacher_ID)
-    REFERENCES Teacher (ID);
-
--- Reference: Student_House (table: Student)
-ALTER TABLE Student ADD CONSTRAINT Student_House
-    FOREIGN KEY (House_ID)
-    REFERENCES House (ID);
-
--- Reference: Table_15_Club (table: Club_Teacher)
-ALTER TABLE Club_Teacher ADD CONSTRAINT Table_15_Club
-    FOREIGN KEY (Club_ID)
-    REFERENCES Club (ID);
-
--- Reference: Table_15_Teacher (table: Club_Teacher)
-ALTER TABLE Club_Teacher ADD CONSTRAINT Table_15_Teacher
-    FOREIGN KEY (Teacher_ID)
-    REFERENCES Teacher (ID);
-
--- Reference: Table_16_Club (table: Club_Student)
-ALTER TABLE Club_Student ADD CONSTRAINT Table_16_Club
-    FOREIGN KEY (Club_ID)
-    REFERENCES Club (ID);
-
--- Reference: Table_16_Student (table: Club_Student)
-ALTER TABLE Club_Student ADD CONSTRAINT Table_16_Student
-    FOREIGN KEY (Student_ID)
-    REFERENCES Student (ID);
-
--- Reference: Table_17_Subject (table: Subject_Teacher)
-ALTER TABLE Subject_Teacher ADD CONSTRAINT Table_17_Subject
-    FOREIGN KEY (Subject_ID)
-    REFERENCES Subject (ID);
-
--- Reference: Table_17_Teacher (table: Subject_Teacher)
-ALTER TABLE Subject_Teacher ADD CONSTRAINT Table_17_Teacher
-    FOREIGN KEY (Teacher_ID)
-    REFERENCES Teacher (ID);
-
--- Reference: Teacher_House (table: Teacher)
-ALTER TABLE Teacher ADD CONSTRAINT Teacher_House
-    FOREIGN KEY (House_ID)
-    REFERENCES House (ID);
-
--- End of file.
-
